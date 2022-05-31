@@ -1,5 +1,6 @@
 //= require trimpath-template-1.0.38
 //= require bootstrap-datepicker
+//= require bootstrap-datepicker-overrides
 //= require bootstrap-combobox
 
 var AS = {}; // eslint-disable-line

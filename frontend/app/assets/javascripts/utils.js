@@ -1,6 +1,5 @@
 //= require trimpath-template-1.0.38
 //= require bootstrap-datepicker
-//= require bootstrap-datepicker-overrides
 //= require bootstrap-combobox
 
 var AS = {}; // eslint-disable-line
@@ -183,17 +182,32 @@ $(function () {
 
       $dateInput.addClass('initialised');
 
-      var $addon = $(
-        "<span class='input-group-addon' role='button' aria-label='" +
-          $(this).data('label') +
-          "'><i class='glyphicon glyphicon-calendar'></i></span>"
-      );
+      var $addon = $(`
+        <div class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </div>
+      `);
+      // var $addon = $(
+      //   "<span class='input-group-addon' role='button' aria-label='" +
+      //     $(this).data('label') +
+      //     "'><i class='glyphicon glyphicon-calendar'></i></span>"
+      // );
       $dateInput.after($addon);
 
-      $dateInput.datepicker($dateInput.data());
+      let enableDatepicker = false;
 
       $addon.on('click', function () {
-        $dateInput.focus().select();
+        console.log('$addon this::::', this);
+        enableDatepicker = !enableDatepicker;
+        if (enableDatepicker) {
+          $(this).addClass('datepicker-enabled');
+          $(this).addClass('datepicker-enabled');
+          $dateInput.datepicker($dateInput.data());
+          $dateInput.trigger('focus').trigger('select');
+        } else {
+          $(this).removeClass('datepicker-enabled');
+          $dateInput.datepicker('destroy');
+        }
       });
     });
   };
